@@ -1,0 +1,1243 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #020203;
+  color: #fff;
+  font-family: var(--font-sans);
+}
+
+:root {
+  --accent: #cfa861;
+  --text-muted: #888888;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', 'Georgia', serif; /* The new elegant font */
+  --font-mono: 'Courier New', Courier, monospace;
+}
+
+/* Background System */
+.bg-system {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100vw; 
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+}
+
+.orb-1 {
+  top: -10%; left: -10%;
+  width: 50vw; height: 50vw;
+  background: var(--accent);
+}
+
+.orb-2 {
+  bottom: -10%; right: -10%;
+  width: 40vw; height: 40vw;
+  background: #ffffff;
+}
+
+/* Base UI Elements */
+.action-btn {
+  padding: 1.2rem 4rem;
+  background-color: var(--accent);
+  color: #000;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(207, 168, 97, 0.2);
+  border-radius: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  background-color: #e6bf75;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* --- V1.3 UI ENHANCEMENTS --- */
+
+/* Landing Page Grid */
+.feature-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem 10rem 2rem;
+  position: relative;
+  z-index: 10;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.feature-card {
+  background-color: #0a0a0a;
+  border: 1px solid #222;
+  border-radius: 4px;
+  padding: 2.5rem;
+  min-height: 250px;
+  transition: border-color 0.2s ease;
+}
+.feature-card:hover {
+  border-color: var(--accent);
+}
+
+/* Vault Interface */
+.vault-sidebar-btn {
+  width: 100%; padding: 0.8rem; background: transparent; 
+  border: 1px solid var(--accent); color: var(--accent); 
+  cursor: pointer; font-family: monospace; font-weight: bold;
+  transition: all 0.2s; margin-bottom: 2rem;
+}
+.vault-sidebar-btn:hover {
+  background: var(--accent); color: #000;
+}
+.vault-nav-item {
+  padding: 0.6rem 1rem; color: #888; cursor: pointer; 
+  font-family: monospace; font-size: 0.9rem; border-left: 2px solid transparent;
+}
+.vault-nav-item:hover {
+  background: rgba(207, 168, 97, 0.05); color: #fff; border-left: 2px solid var(--accent);
+}
+.panel-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.5rem; border-bottom: 1px solid #222; background: #050508;
+}
+.panel-title {
+  color: var(--accent); font-family: monospace; font-size: 0.8rem; letter-spacing: 1px;
+}
+
+/* V1.4 MASTERPIECE: EDITORIAL & GLASS UI */
+
+/* --- ANIMATIONS --- */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+  100% { opacity: 0.3; transform: scale(1); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-delay-1 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-2 { animation-delay: 0.4s; opacity: 0; }
+
+/* --- GLASSMORPHISM --- */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px); /* Slightly reduced for performance */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  transform: translateZ(0); /* Hardware acceleration */
+  will-change: transform;
+}
+
+/* --- LAYOUT & TYPOGRAPHY --- */
+.editorial-wrapper {
+  width: 100%;
+  overflow-x: hidden; /* Absolutely prevents side-scrolling */
+  box-sizing: border-box;
+}
+
+/* Glassy Navigation */
+.editorial-nav {
+  position: fixed;
+  top: 0; width: 100%;
+  padding: 1.5rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100; box-sizing: border-box;
+  background: rgba(2, 2, 3, 0.65); /* Slightly darker for better contrast */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* The thin, premium border */
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px;
+}
+
+.nav-btn {
+  background: transparent; color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.6rem 2rem; border-radius: 4px;
+  font-family: var(--font-sans); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 2px;
+  cursor: pointer; transition: all 0.3s ease;
+}
+.nav-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* The Hero */
+.editorial-hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 10vw; position: relative; z-index: 10;
+}
+
+/* The True Heading */
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 6.5rem); /* Scaled down for a tighter, refined look */
+  font-weight: 300; 
+  line-height: 1.05;
+  letter-spacing: -0.03em; 
+  margin: 10vh 0 2rem 0; 
+  max-width: 1000px;
+}
+
+.hero-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  padding-right: 0.1em; /* Fixes italic clipping */
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.2rem; color: var(--text-muted);
+  max-width: 500px; line-height: 1.6; font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Sections */
+.editorial-section {
+  padding: 10rem 10vw; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center;
+  position: relative;
+}
+
+.section-reverse { grid-template-columns: 1fr 1fr; direction: rtl; }
+.section-reverse > * { direction: ltr; }
+
+.section-number {
+  font-family: var(--font-mono); color: var(--accent);
+  font-size: 0.8rem; margin-bottom: 2rem; display: block;
+  letter-spacing: 3px; text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-serif); font-size: 3.5rem;
+  font-weight: 300; line-height: 1.2; margin: 0 0 1.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.section-title em {
+  font-style: italic; color: #888; font-weight: 300;
+}
+
+.section-text {
+  color: var(--text-muted); font-size: 1.1rem;
+  line-height: 1.8; font-weight: 300;
+}
+
+/* The Abstract Glass Visuals */
+.glass-visual-container {
+  position: relative; width: 100%; aspect-ratio: 1;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.glass-floating-card {
+  width: 60%; height: 70%;
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-floating-card:nth-child(2) {
+  width: 50%; height: 60%;
+  left: 10%; top: 30%;
+  animation-delay: -3s;
+  background: rgba(207, 168, 97, 0.05);
+}
+
+.glow-back {
+  position: absolute; 
+  width: 120%; /* Expanded to cover the area without needing a blur filter */
+  height: 120%;
+  /* Using a gradient instead of a blur filter saves the GPU */
+  background: radial-gradient(circle at center, rgba(207, 168, 97, 0.15) 0%, transparent 60%);
+  animation: glowPulse 8s infinite;
+  transform: translateZ(0); /* Forces GPU hardware acceleration */
+  pointer-events: none;
+}
+
+/* V1.6 VAULT COCKPIT STYLES */
+
+.vault-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #020203;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Columns */
+/* --- Updated Columns with Smooth Transitions --- */
+.vault-left-col {
+  width: 260px;
+  border-right: 1px solid #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  background: #050508;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); /* Smooth collapse */
+  overflow-x: hidden;
+  white-space: nowrap; /* Prevents text wrapping when shrinking */
+}
+
+/* New class to trigger the collapsed state */
+.vault-left-col.collapsed {
+  width: 68px;
+}
+
+.vault-center-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; 
+  background: #020203;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* New class to trigger the full-screen modal mode */
+.vault-center-col.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
+/* --- Sidebar Icon Alignment --- */
+.vault-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between icon and text */
+  padding: 0.6rem 1.5rem;
+  color: #888;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.vault-nav-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.nav-text {
+  transition: opacity 0.2s ease, width 0.2s ease;
+  opacity: 1;
+}
+
+/* Fix for collapsed sidebar alignment */
+.collapsed .vault-nav-item {
+  padding: 0.6rem 0;
+  justify-content: center;
+}
+
+.collapsed .nav-text,
+.collapsed .cyber-header span {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  overflow: hidden;
+  margin: 0 !important;
+  flex: none !important;
+  padding: 0 !important;
+}
+
+.collapsed .vault-nav-item svg {
+  margin: 0;
+}
+
+/* Top Navigation Bar in Editor */
+.editor-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: #888;
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+}
+
+.top-nav-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.top-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.vault-right-col {
+  width: 340px;
+  border-left: 1px solid #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  background: #050508;
+}
+
+/* UI Components */
+.cyber-header {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.widget-panel {
+  padding: 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* Search & Input */
+.global-search {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #555;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.rapid-input-wrapper {
+  padding: 2rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.rapid-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: var(--font-sans);
+  outline: none;
+}
+.rapid-input::placeholder { color: #333; }
+
+/* Metrics */
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.metric-value {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #fff;
+}
+.metric-label {
+  font-size: 0.7rem;
+  color: #666;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+/* V1.5 NOTION-STYLE EDITOR UPGRADES */
+
+/* Smooth page load animation */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notion-page-transition {
+  animation: pageFadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* The massive, invisible title input */
+.notion-title-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
+  font-family: var(--font-sans);
+  outline: none;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0 54px; /* Aligns perfectly with BlockNote's text margin */
+}
+
+.notion-title-input::placeholder { 
+  color: #333; 
+}
+
+/* Elegant, minimal scrollbar for the editor */
+.editor-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+.editor-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.editor-scroll-area::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+.editor-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* V1.6.0.1 GRAND COCKPIT LAYOUT */
+
+/* New color variables */
+:root {
+  /* Using your inspiration gold/amber for key phrase highlights */
+  --highlight-gold: #cfa861; 
+}
+
+/* Subtle background grid overlay on panels, but not top nav */
+.cyber-grid-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(207, 168, 97, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(207, 168, 97, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- New Panel Sections (Image 5/6 inspiration) --- */
+.panel-grid-section {
+  position: relative;
+  padding: 5rem 5vw; /* Reduced from 10rem 10vw */
+  background-color: #020203;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 10;
+  box-sizing: border-box; /* Keeps padding inside the 100% width */
+}
+
+.panel-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; /* Slightly tighter gap between panels */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-panel-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  perspective: 1200px; /* Enable 3D space */
+}
+
+.dashboard-panel {
+  position: relative;
+  padding: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease, border 0.6s ease, background 0.6s ease, border-radius 0.6s ease;
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: rgba(15, 15, 20, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  z-index: 1;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(0) rotateX(0) rotateY(0);
+}
+
+/* The Mesh Gradient hidden inside by default */
+.dashboard-panel::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  background: 
+    radial-gradient(ellipse at 40% 40%, rgba(207, 168, 97, 0.8) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 30%, rgba(220, 150, 50, 0.6) 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 70%, rgba(150, 100, 30, 0.5) 0%, transparent 40%);
+  filter: blur(50px);
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Hover State - 3D Pop Out & Glow */
+.dashboard-panel-container:hover .dashboard-panel {
+  
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  
+  box-shadow: 
+    20px 30px 50px rgba(0, 0, 0, 0.8),
+    -10px -10px 30px rgba(207, 168, 97, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 30px rgba(207, 168, 97, 0.4),
+    inset 10px 20px 40px -10px rgba(255, 255, 255, 0.3);
+    
+  background: transparent;
+}
+
+/* Reveal Mesh Gradient */
+.dashboard-panel-container:hover .dashboard-panel::before {
+  opacity: 1;
+  transform: scale(1.2) rotate(15deg);
+}
+
+/* Add the sweeping glare to enhance the 3D glass feel */
+.dashboard-panel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 40%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.dashboard-panel-container:hover .dashboard-panel::after {
+  animation: glass-sweep 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes glass-sweep {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.dashboard-panel-number {
+  font-family: var(--font-mono);
+  font-size: 5rem;
+  color: var(--highlight-gold);
+  opacity: 0.1;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-weight: 300;
+  pointer-events: none;
+}
+
+.dashboard-panel-title {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: #fff;
+  margin: 0;
+}
+
+.dashboard-panel-title em {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--highlight-gold);
+}
+
+.dashboard-panel-text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: #888;
+  max-width: 90%;
+}
+
+/* Gold Marquee Footer Ticker (Image 4 inspiration) */
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-marquee {
+  width: 100%;
+  height: 50px;
+  background: #000;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+.ticker-content {
+  display: flex;
+  animation: scrollTicker 60s linear infinite;
+}
+
+.ticker-content:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  padding: 0 4rem;
+}
+
+.ticker-item::after {
+  content: " ✦ ";
+  color: var(--highlight-gold);
+  margin-left: 1rem;
+}
+
+/* Workflow Step Section (Image 7/8 inspiration) */
+.workflow-section {
+  position: relative;
+  padding: 5rem 5vw; /* Reduced from 10rem 10vw */
+  background-color: #020203;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem; /* Reduced from 6rem */
+  z-index: 10;
+  box-sizing: border-box; /* Keeps padding inside the 100% width */
+}
+
+.workflow-step {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.workflow-num {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--highlight-gold);
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.workflow-step-title {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: #fff;
+  margin: 0;
+}
+
+.workflow-step-title em {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-style: italic;
+  color: #fff;
+}
+
+.workflow-step-text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: #888;
+  max-width: 60%;
+  margin-top: 1rem;
+}
+
+/* GAMIFICATION: COGNITIVE LEVEL BAR */
+.xp-container {
+  padding: 0 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.xp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 6px;
+}
+
+.xp-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.xp-level {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--accent);
+  line-height: 1;
+  font-style: italic;
+}
+
+.xp-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.xp-fill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(207, 168, 97, 0.5);
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* BLOCKNOTE NOTION-STYLE OVERRIDES */
+.notion-editor-wrapper {
+  --bn-colors-editor-background: transparent !important; 
+}
+
+.notion-editor-wrapper .bn-container,
+.notion-editor-wrapper .bn-editor,
+.notion-editor-wrapper .mantine-Paper-root {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.notion-editor-wrapper .bn-block-content {
+  font-family: var(--font-sans) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  line-height: 1.7 !important;
+}
+
+.notion-editor-wrapper .bn-block-content[data-is-empty-and-focused]::before {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* CUSTOM CYBERPUNK SLASH MENU */
+.cyber-slash-menu-wrapper {
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  max-height: 300px;
+  overflow-y: auto;
+  min-width: 220px;
+  z-index: 99999;
+}
+
+.cyber-slash-menu-item {
+  padding: 8px 12px;
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  transition: all 0.1s ease;
+}
+
+.cyber-slash-menu-item:hover, 
+.cyber-slash-menu-item.selected {
+  background: var(--accent);
+  color: #000;
+  font-weight: 500;
+}
+
+/* Elegant scrollbar for the menu */
+.cyber-slash-menu-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.cyber-slash-menu-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cyber-slash-menu-wrapper::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.cta-section {
+  padding: 8rem 5vw 10rem 5vw;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* GAMIFICATION: COGNITIVE LEVEL BAR */
+.xp-container {
+  padding: 0 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.xp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 6px;
+}
+
+.xp-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.xp-level {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--accent);
+  line-height: 1;
+  font-style: italic;
+}
+
+.xp-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.xp-fill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(207, 168, 97, 0.5);
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* BLOCKNOTE NOTION-STYLE OVERRIDES */
+.notion-editor-wrapper {
+  --bn-colors-editor-background: transparent !important; 
+}
+
+.notion-editor-wrapper .bn-container,
+.notion-editor-wrapper .bn-editor,
+.notion-editor-wrapper .mantine-Paper-root {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.notion-editor-wrapper .bn-block-content {
+  font-family: var(--font-sans) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  line-height: 1.7 !important;
+}
+
+.notion-editor-wrapper .bn-block-content[data-is-empty-and-focused]::before {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* CUSTOM CYBERPUNK SLASH MENU */
+.cyber-slash-menu-wrapper {
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  max-height: 300px;
+  overflow-y: auto;
+  min-width: 220px;
+  z-index: 99999;
+}
+
+.cyber-slash-menu-item {
+  padding: 8px 12px;
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  transition: all 0.1s ease;
+}
+
+.cyber-slash-menu-item:hover, 
+.cyber-slash-menu-item.selected {
+  background: var(--accent);
+  color: #000;
+  font-weight: 500;
+}
+
+/* Elegant scrollbar for the menu */
+.cyber-slash-menu-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.cyber-slash-menu-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cyber-slash-menu-wrapper::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.cta-section {
+  padding: 8rem 5vw 10rem 5vw;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  body, html {
+    overflow-x: hidden;
+  }
+  .hide-on-mobile {
+    display: none !important;
+  }
+  .editorial-nav {
+    padding: 1rem 5vw !important;
+  }
+  .nav-logo span {
+    font-size: 0.9rem !important;
+    letter-spacing: 1px !important;
+  }
+  .nav-actions {
+    gap: 0.75rem !important;
+  }
+  .nav-btn {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+  .ticker-marquee {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  .hero-title {
+    font-size: 3.5rem !important;
+    line-height: 1.1;
+  }
+  .responsive-h2 {
+    font-size: 3rem !important;
+  }
+  .responsive-h2-sm {
+    font-size: 2.5rem !important;
+  }
+  .responsive-h2-lg {
+    font-size: 4rem !important;
+  }
+  .panel-grid-section, .workflow-section {
+    padding: 3rem 5vw !important;
+  }
+  .panel-grid-section {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+  .cta-section {
+    padding: 5rem 5vw 6rem 5vw !important;
+  }
+  .section-header-wrap {
+    text-align: left !important;
+  }
+  .section-header-wrap span.cyber-header {
+    justify-content: flex-start !important;
+  }
+  .section-text {
+    max-width: 100% !important;
+  }
+  .section-text-bordered {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid var(--accent);
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+  .section-text-bordered-right {
+    border-right: none !important;
+    padding-right: 0 !important;
+    border-top: 1px solid var(--accent);
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+  .panel-row {
+    grid-template-columns: 1fr !important;
+  }
+  .panel-span-2 {
+    grid-column: 1 / 2 !important;
+  }
+  .workflow-step {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+  .workflow-step-title {
+    font-size: 2rem !important;
+  }
+  .workflow-step-text {
+    max-width: 100% !important;
+    font-size: 0.95rem !important;
+  }
+  .responsive-glass-container {
+    height: auto !important;
+    min-height: 300px !important;
+  }
+  .responsive-glass-container > div:last-child {
+    width: 100% !important;
+  }
+  .responsive-card-content {
+    word-break: break-word !important;
+    white-space: normal !important;
+    padding: 1rem !important;
+    width: 100% !important;
+  }
+  .long-text-wrap {
+    overflow-wrap: break-word !important;
+  }
+  .pure-css-diagram-container {
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding-bottom: 1.5rem !important;
+  }
+  .pure-css-diagram-container > div {
+    transform-origin: left center !important;
+  }
+  .hero-content-row {
+    flex-direction: column !important;
+    gap: 2rem !important;
+    text-align: center !important;
+  }
+  .hero-content-row > div {
+    width: 100% !important;
+  }
+  .neural-network-visual {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 300px;
+    margin-top: 2rem;
+  }
+  .neural-network-visual img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .neural-network-visual svg {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Fast transition for mouse tracking on hover */
+.dashboard-panel-container:hover .dashboard-panel {
+  transition: transform 0.1s ease-out, box-shadow 0.6s ease, border 0.6s ease, background 0.6s ease, border-radius 0.6s ease;
+}
+
+/* ✦ GOLD SCROLLING TICKER MARQUEE */
+.ticker-marquee {
+  width: 100vw;
+  margin-left: -5vw;
+  overflow: hidden;
+  background: var(--surface);
+  border-top: 1px solid rgba(207, 168, 97, 0.2);
+  border-bottom: 1px solid rgba(207, 168, 97, 0.2);
+  padding: 1.5rem 0;
+  display: flex;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  display: flex;
+  animation: scroll-left 40s linear infinite;
+}
+
+.ticker-item {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 3rem;
+  position: relative;
+}
+
+/* Add bullet separators between ticker items */
+.ticker-item::after {
+  content: '•';
+  position: absolute;
+  right: 0;
+  color: rgba(207, 168, 97, 0.3);
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* PRIMARY CTA BUTTON */
+.primary-cta-btn {
+  background: var(--text-primary);
+  color: var(--bg);
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px 0 rgba(255, 255, 255, 0.1);
+}
+
+.primary-cta-btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(207, 168, 97, 0.2);
+}
