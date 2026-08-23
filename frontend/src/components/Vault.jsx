@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import io from 'socket.io-client';
@@ -25,7 +26,7 @@ function Vault({ user, setUser }) {
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
-        const res = await fetch('http://localhost:5000/api/auth/google', {
+        const res = await fetch(API_URL + '/api/auth/google', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ credential: tokenResponse.access_token })
@@ -95,7 +96,7 @@ function Vault({ user, setUser }) {
     const token = localStorage.getItem('token');
     
     // Initial fetch
-    fetch('http://localhost:5000/api/graph', {
+    fetch(API_URL + '/api/graph', {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -110,7 +111,7 @@ function Vault({ user, setUser }) {
       .catch(err => console.error(err));
 
     // Socket.io connection
-    const socket = io('http://localhost:5000');
+    const socket = io(API_URL + '');
     socket.emit('join_room', user.id);
 
     socket.on('node_added', (node) => {
@@ -183,7 +184,7 @@ function Vault({ user, setUser }) {
   // --- NODE ACTIONS ---
   const handleCreateNode = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/graph/nodes', {
+    const res = await fetch(API_URL + '/api/graph/nodes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({
@@ -200,7 +201,7 @@ function Vault({ user, setUser }) {
     if (!selectedNodeId) return;
     setSyncStatus('syncing');
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:5000/api/graph/nodes/${selectedNodeId}`, {
+    await fetch(`${API_URL}/api/graph/nodes/${selectedNodeId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ name: localTitle })
@@ -212,7 +213,7 @@ function Vault({ user, setUser }) {
     if (!selectedNodeId) return;
     setSyncStatus('syncing');
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:5000/api/graph/nodes/${selectedNodeId}`, {
+    await fetch(`${API_URL}/api/graph/nodes/${selectedNodeId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ folder: newFolder || null })
@@ -229,7 +230,7 @@ function Vault({ user, setUser }) {
 
     if (!linkExists) {
       const token = localStorage.getItem('token');
-      await fetch('http://localhost:5000/api/graph/links', {
+      await fetch(API_URL + '/api/graph/links', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ source: sourceId, target: targetId })
@@ -240,7 +241,7 @@ function Vault({ user, setUser }) {
   const handleRemoveLink = async (linkId) => {
     if (!linkId) return;
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:5000/api/graph/links/${linkId}`, {
+    await fetch(`${API_URL}/api/graph/links/${linkId}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });
@@ -264,7 +265,7 @@ function Vault({ user, setUser }) {
         setSyncStatus('syncing');
 
         const token = localStorage.getItem('token');
-        await fetch(`http://localhost:5000/api/graph/nodes/${targetId}`, {
+        await fetch(`${API_URL}/api/graph/nodes/${targetId}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -277,7 +278,7 @@ function Vault({ user, setUser }) {
 
         for (const link of linksToSever) {
           if (link.id) {
-            await fetch(`http://localhost:5000/api/graph/links/${link.id}`, {
+            await fetch(`${API_URL}/api/graph/links/${link.id}`, {
               method: 'DELETE',
               headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -302,7 +303,7 @@ function Vault({ user, setUser }) {
     setNewFolderName("");
 
     const token = localStorage.getItem('token');
-    await fetch('http://localhost:5000/api/graph/folders', {
+    await fetch(API_URL + '/api/graph/folders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ name: nameToSave })
@@ -312,7 +313,7 @@ function Vault({ user, setUser }) {
   const handleRenameFolder = async (folderId) => {
     if (editFolderName.trim()) {
       const token = localStorage.getItem('token');
-      await fetch(`http://localhost:5000/api/graph/folders/${folderId}`, {
+      await fetch(`${API_URL}/api/graph/folders/${folderId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ name: editFolderName.trim() })
@@ -337,13 +338,13 @@ function Vault({ user, setUser }) {
         const token = localStorage.getItem('token');
         const orphanedNodes = graphData.nodes.filter(n => n.folder === folderId);
         for (const node of orphanedNodes) {
-          await fetch(`http://localhost:5000/api/graph/nodes/${node.id}`, {
+          await fetch(`${API_URL}/api/graph/nodes/${node.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ folder: null })
           });
         }
-        await fetch(`http://localhost:5000/api/graph/folders/${folderId}`, {
+        await fetch(`${API_URL}/api/graph/folders/${folderId}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });

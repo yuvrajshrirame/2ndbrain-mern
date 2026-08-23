@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 import React, { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import BootSequence from './components/BootSequence';
@@ -14,7 +15,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const res = await fetch('http://localhost:5000/api/auth/me', {
+          const res = await fetch(API_URL + '/api/auth/me', {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           if (res.ok) {

@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom'; // <-- WE IMPORTED PORTAL
 import { filterSuggestionItems } from "@blocknote/core"; 
@@ -98,7 +99,7 @@ function EditorCore({ documentId, initialContent, onSyncStatusChange, nodes, lin
       try {
         const currentContent = JSON.stringify(editor.document);
         const token = localStorage.getItem('token');
-        await fetch(`http://localhost:5000/api/graph/nodes/${documentId}`, {
+        await fetch(`${API_URL}/api/graph/nodes/${documentId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
           body: JSON.stringify({ content: currentContent })
@@ -194,7 +195,7 @@ function EditorCore({ documentId, initialContent, onSyncStatusChange, nodes, lin
       const allText = editor.document.map(b => b.content ? b.content.map(c => c.text).join('') : '').join('\n');
       
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/ai/generate', {
+      const res = await fetch(API_URL + '/api/ai/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ query, documentText: allText })
@@ -295,7 +296,7 @@ function EditorCore({ documentId, initialContent, onSyncStatusChange, nodes, lin
         onItemClick: async () => {
           onSyncStatusChange('syncing');
           const token = localStorage.getItem('token');
-          const res = await fetch('http://localhost:5000/api/graph/nodes', {
+          const res = await fetch(API_URL + '/api/graph/nodes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({
