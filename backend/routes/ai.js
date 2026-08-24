@@ -21,7 +21,21 @@ router.post('/generate', auth, async (req, res) => {
     Here is the current document's context:\n"${documentText}"\n\n
     The user wants you to do the following: "${query}"
     Respond using rich Markdown formatting (headings, bullet points, bold text, and code blocks). 
-    CRITICAL INSTRUCTION: If the user asks for a diagram, flowchart, graph, or visual representation, you MUST ALWAYS generate it using valid Mermaid.js syntax inside a \`\`\`mermaid code block. Do NOT use backslashes for line breaks. ALWAYS wrap node labels in double quotes (e.g., A["Label with spaces and (special) chars"] ) to prevent syntax errors.`;
+    
+    CRITICAL MERMAID INSTRUCTIONS:
+    If the user asks for a diagram, flowchart, graph, or visual representation, you MUST ALWAYS generate it using valid Mermaid.js syntax inside a \`\`\`mermaid code block.
+    To prevent severe parser crashes, YOU MUST strictly follow these rules:
+    1. ALWAYS declare an ID for every node. NEVER define a node solely by its text string.
+       - INCORRECT: Java Virtual Machine (JVM) --> C
+       - CORRECT: A["Java Virtual Machine (JVM)"] --> C["Node C"]
+    2. ALWAYS wrap node labels in DOUBLE QUOTES inside the brackets/parentheses to safely escape special characters like ( ) and [ ].
+       - INCORRECT: B[Compiler (JIT)]
+       - CORRECT: B["Compiler (JIT)"]
+    3. NEVER put double quotes around link text. Link text must be unquoted or wrapped in pipes.
+       - INCORRECT: A -- "compiles to" --> B
+       - CORRECT: A -- compiles to --> B
+       - CORRECT: A -->|compiles to| B
+    4. NEVER use backslashes for line breaks.`;
 
     const result = await model.generateContent(promptText);
     const response = await result.response;
