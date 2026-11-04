@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const TiltCard = ({ children, className = '', containerStyle = {}, cardStyle = {} }) => {
   const cardRef = useRef(null);
@@ -373,6 +374,25 @@ function LandingPage({ onEnter }) {
            >
              EXPLORE DOCUMENTATION
            </a>
+         </div>
+         <div style={{ marginTop: '0.75rem', display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+           <Link
+             to="/privacy"
+             style={{ color: '#555', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '1.5px', textTransform: 'uppercase', transition: 'color 0.2s ease' }}
+             onMouseEnter={(e) => { e.target.style.color = 'var(--accent)'; }}
+             onMouseLeave={(e) => { e.target.style.color = '#555'; }}
+           >
+             Privacy Policy
+           </Link>
+           <span style={{ color: '#333', fontFamily: 'var(--font-mono)', fontSize: '0.55rem' }}>·</span>
+           <Link
+             to="/terms"
+             style={{ color: '#555', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '1.5px', textTransform: 'uppercase', transition: 'color 0.2s ease' }}
+             onMouseEnter={(e) => { e.target.style.color = 'var(--accent)'; }}
+             onMouseLeave={(e) => { e.target.style.color = '#555'; }}
+           >
+             Terms of Service
+           </Link>
          </div>
       </footer>
 

@@ -1,11 +1,14 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import BootSequence from './components/BootSequence';
 import Vault from './components/Vault';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-function App() {
+function AppCore() {
   const [appState, setAppState] = useState('marketing');
   const [user, setUser] = useState(null);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
@@ -42,10 +45,24 @@ function App() {
   if (isCheckingAuth) return <div style={{ height: '100vh', backgroundColor: '#020203' }}></div>;
 
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "TODO_CLIENT_ID"}>
+    <>
       {appState === 'marketing' && <LandingPage onEnter={() => setAppState('booting')} />}
       {appState === 'booting' && <BootSequence onComplete={() => setAppState('vault')} />}
       {appState === 'vault' && <Vault user={user} setUser={setUser} />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "TODO_CLIENT_ID"}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="*" element={<AppCore />} />
+        </Routes>
+      </BrowserRouter>
     </GoogleOAuthProvider>
   );
 }
