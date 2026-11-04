@@ -6,6 +6,7 @@ import BootSequence from './components/BootSequence';
 import Vault from './components/Vault';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import ScrollToTop from './components/ScrollToTop';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function AppCore() {
@@ -57,6 +58,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || "TODO_CLIENT_ID"}>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
