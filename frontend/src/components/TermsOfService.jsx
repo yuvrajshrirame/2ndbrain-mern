@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const LAST_UPDATED = 'November 5, 2025';
 const APP_NAME = '2ndBrain';
-const CONTACT_EMAIL = 'yuvrajshrirame5@gmail.com';
+const CONTACT_EMAIL = 'mail.yuvrajshrirame@gmail.com';
 const GITHUB_URL = 'https://github.com/yuvrajshrirame/2ndbrain-mern';
 
 function LegalNav() {
